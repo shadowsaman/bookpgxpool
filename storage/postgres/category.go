@@ -13,17 +13,17 @@ import (
 	"github.com/google/uuid"
 )
 
-type categoryRepo struct {
+type CategoryRepo struct {
 	db *pgxpool.Pool
 }
 
-func NewCategoryRepo(db *pgxpool.Pool) *categoryRepo {
-	return &categoryRepo{
+func NewCategoryRepo(db *pgxpool.Pool) *CategoryRepo {
+	return &CategoryRepo{
 		db: db,
 	}
 }
 
-func (r *categoryRepo) Insert(ctx context.Context, category *models.CreateCategory) (string, error) {
+func (r *CategoryRepo) Insert(ctx context.Context, category *models.CreateCategory) (string, error) {
 
 	var (
 		id = uuid.New().String()
@@ -49,7 +49,7 @@ func (r *categoryRepo) Insert(ctx context.Context, category *models.CreateCatego
 	return id, nil
 }
 
-func (r *categoryRepo) GetByID(ctx context.Context, req *models.CategoryPrimeryKey) (*models.Category, error) {
+func (r *CategoryRepo) GetByID(ctx context.Context, req *models.CategoryPrimeryKey) (*models.Category, error) {
 
 	query := `
 		SELECT
@@ -154,7 +154,7 @@ func (r *categoryRepo) GetByID(ctx context.Context, req *models.CategoryPrimeryK
 	return category, nil
 }
 
-func (r *categoryRepo) GetList(ctx context.Context, req *models.GetListCategoryRequest) (*models.GetListCategoryResponse, error) {
+func (r *CategoryRepo) GetList(ctx context.Context, req *models.GetListCategoryRequest) (*models.GetListCategoryResponse, error) {
 
 	var (
 		resp   models.GetListCategoryResponse
@@ -221,7 +221,7 @@ func (r *categoryRepo) GetList(ctx context.Context, req *models.GetListCategoryR
 	return &resp, nil
 }
 
-func (r *categoryRepo) Update(ctx context.Context, category *models.UpdateCategory) error {
+func (r *CategoryRepo) Update(ctx context.Context, category *models.UpdateCategory) error {
 
 	query := `
 	UPDATE
@@ -244,7 +244,7 @@ func (r *categoryRepo) Update(ctx context.Context, category *models.UpdateCatego
 	return nil
 }
 
-func (r *categoryRepo) Delete(ctx context.Context, req *models.CategoryPrimeryKey) error {
+func (r *CategoryRepo) Delete(ctx context.Context, req *models.CategoryPrimeryKey) error {
 	_, err := r.db.Exec(ctx, "DELETE FROM book_category WHERE id = $1", req.Id)
 
 	if err != nil {

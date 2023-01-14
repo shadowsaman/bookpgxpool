@@ -4,8 +4,10 @@ go 1.18
 
 require (
 	github.com/gin-gonic/gin v1.8.2
+	github.com/google/go-cmp v0.5.5
 	github.com/google/uuid v1.3.0
 	github.com/jackc/pgx/v4 v4.17.2
+	github.com/lib/pq v1.10.7
 	github.com/swaggo/files v1.0.0
 	github.com/swaggo/gin-swagger v1.5.3
 )
@@ -19,7 +21,6 @@ require (
 	github.com/jackc/pgservicefile v0.0.0-20200714003250-2b9c44734f2b // indirect
 	github.com/jackc/pgtype v1.12.0 // indirect
 	github.com/jackc/puddle v1.3.0 // indirect
-	github.com/lib/pq v1.10.7 // indirect
 )
 
 require (
